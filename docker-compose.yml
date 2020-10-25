@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nginx:
+    build:
+      context: "./services/Nginx"
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "80:80"
+  backend:
+    build:
+      context: "./services/Backend"
+      dockerfile: Dockerfile.dev
+    environment:
+      BACKEND_CLIENT_PORT: 3030
+  willowglen:
+    build:
+      context: "./services/Willowglen"
+      dockerfile: Dockerfile.dev
+    environment:
+      WILLOWGLEN_CLIENT_PORT: 3031
