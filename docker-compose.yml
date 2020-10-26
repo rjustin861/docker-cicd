@@ -7,12 +7,26 @@ services:
     restart: always
     ports:
       - "80:80"
+  db:
+    build:
+      context: "./services/DB"
+      dockerfile: Dockerfile.dev
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=SP
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - "27017:27017"
   backend:
     build:
       context: "./services/Backend"
       dockerfile: Dockerfile.dev
     environment:
-      BACKEND_CLIENT_PORT: 3030
+      - BACKEND_CLIENT_PORT=3030
+      - DATABASE_URL=mongodb://root:password@db:27017/SP
+    depends_on:
+      - db
   willowglen:
     build:
       context: "./services/Willowglen"
