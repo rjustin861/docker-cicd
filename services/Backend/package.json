@@ -24,7 +24,7 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run jest test/app.test.js",
+    "test": "jest app.test.js",
     "lint": "standard",
     "dev": "nodemon src/",
     "start": "node src/",
